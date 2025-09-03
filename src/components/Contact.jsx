@@ -1,25 +1,27 @@
 import { useRef } from "react";
 import emailjs from "emailjs-com";
+import { useLanguage } from "../LanguageContext";
 
 function Contact() {
   const form = useRef();
+  const { isEnglish, translations } = useLanguage();
 
   const sendEmail = (e) => {
     e.preventDefault();
 
     emailjs
       .sendForm(
-        "service_sn77tub",   // Service ID
-        "template_oaxjlzm",  // Template ID
+        "service_sn77tub", // Service ID
+        "template_oaxjlzm", // Template ID
         form.current,
-        "IT9PG_3_Xkyp1O-pf"   // Public Key
+        "IT9PG_3_Xkyp1O-pf" // Public Key
       )
       .then(
         (result) => {
-          alert("✅ تم إرسال الرسالة بنجاح!");
+          alert(isEnglish ? "✅ Message sent successfully!" : "✅ تم إرسال الرسالة بنجاح!");
         },
         (error) => {
-          alert("❌ حدث خطأ، حاول مرة أخرى.");
+          alert(isEnglish ? "❌ Error occurred, please try again." : "❌ حدث خطأ، حاول مرة أخرى.");
         }
       );
   };
@@ -35,7 +37,7 @@ function Contact() {
             color: "transparent",
           }}
         >
-          تواصل معي
+          {isEnglish ? translations.contact.title_en : translations.contact.title_ar}
         </h2>
 
         <form
@@ -45,15 +47,32 @@ function Contact() {
           style={{ maxWidth: "600px" }}
         >
           <div className="mb-3">
-            <input type="text" name="name" className="form-control p-3 shadow-sm" placeholder="الاسم الكامل" required />
+            <input
+              type="text"
+              name="name"
+              className="form-control p-3 shadow-sm"
+              placeholder={isEnglish ? "Full Name" : "الاسم الكامل"}
+              required
+            />
           </div>
 
           <div className="mb-3">
-            <input type="email" name="email" className="form-control p-3 shadow-sm" placeholder="البريد الإلكتروني" required />
+            <input
+              type="email"
+              name="email"
+              className="form-control p-3 shadow-sm"
+              placeholder={isEnglish ? "Email Address" : "البريد الإلكتروني"}
+              required
+            />
           </div>
 
           <div className="mb-3">
-            <textarea name="message" className="form-control p-3 shadow-sm" rows="4" placeholder="رسالتك"></textarea>
+            <textarea
+              name="message"
+              className="form-control p-3 shadow-sm"
+              rows="4"
+              placeholder={isEnglish ? "Your Message" : "رسالتك"}
+            ></textarea>
           </div>
 
           <button
@@ -65,7 +84,7 @@ function Contact() {
               color: "#fff",
             }}
           >
-            إرسال
+            {isEnglish ? "Send" : "إرسال"}
           </button>
         </form>
       </div>
@@ -74,7 +93,3 @@ function Contact() {
 }
 
 export default Contact;
-
-//template_oaxjlzm
-//service_sn77tub
-//IT9PG_3_Xkyp1O-pf

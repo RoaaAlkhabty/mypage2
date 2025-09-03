@@ -2,7 +2,7 @@
   "name": "my-portfolio2",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://github.com/RoaaAlkhabty/mypage2",
+  "homepage": "https://RoaaAlkhabty.github.io/mypage2",
   "type": "module",
   "scripts": {
     "dev": "vite",

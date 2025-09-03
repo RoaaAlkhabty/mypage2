@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { useLanguage } from "../LanguageContext";
 
 function Home() {
   const [gradient, setGradient] = useState(0);
   const [stars, setStars] = useState([]);
+  const { isEnglish, toggleLanguage, translations } = useLanguage();
 
-  // إنشاء النجوم عند التحميل
   useEffect(() => {
     const numStars = 50;
     const tempStars = [];
@@ -12,14 +13,13 @@ function Home() {
       tempStars.push({
         top: Math.random() * 100,
         left: Math.random() * 100,
-        size: Math.random() * 6 + 3, // زيادة الحجم: 3px إلى 9px
+        size: Math.random() * 6 + 3,
         delay: Math.random() * 5,
       });
     }
     setStars(tempStars);
   }, []);
 
-  // تغيير لون الخلفية تدريجيًا
   useEffect(() => {
     const interval = setInterval(() => {
       setGradient((prev) => (prev + 1) % 360);
@@ -37,7 +37,6 @@ function Home() {
         transition: "background 0.5s linear",
       }}
     >
-      {/* النجوم */}
       <div className="stars">
         {stars.map((star, index) => (
           <span
@@ -55,9 +54,8 @@ function Home() {
       </div>
 
       <div className="container position-relative" style={{ zIndex: 2 }}>
-        {/* صورة شخصية */}
         <img
-          src="اسمي.jpg" // ضع مسار صورتك هنا
+          src="/images/اسمي.jpg"
           alt="Roa Ahmed"
           className="rounded-circle shadow-lg mb-4"
           width="150"
@@ -72,7 +70,7 @@ function Home() {
           data-aos-duration="1000"
           style={{ textShadow: "2px 2px 8px rgba(0,0,0,0.5)" }}
         >
-          مرحبا، أنا رؤى الخبتي
+          {isEnglish ? translations.home.title_en : translations.home.title_ar}
         </h1>
         <p
           className="lead"
@@ -80,28 +78,38 @@ function Home() {
           data-aos-delay="300"
           style={{ textShadow: "1px 1px 6px rgba(0,0,0,0.5)" }}
         >
-          مطورة ويب | مصممة واجهات تفاعلية
+          {isEnglish ? translations.home.desc_en : translations.home.desc_ar}
         </p>
+
         <a
           href="#portfolio"
-          className="btn btn-light mt-4 px-4 py-2 fw-bold shadow-lg"
+          className="btn btn-light mt-4 px-4 py-2 fw-bold shadow-lg d-block mx-auto"
           data-aos="zoom-in"
           data-aos-delay="600"
-          style={{ transition: "transform 0.3s, background-color 0.3s" }}
-          onMouseEnter={(e) => {
-            e.target.style.transform = "scale(1.1)";
-            e.target.style.backgroundColor = "#f8f9fa";
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.transform = "scale(1)";
-            e.target.style.backgroundColor = "#ffffff";
-          }}
         >
-          شاهد أعمالي
+          {isEnglish ? translations.home.works_en : translations.home.works_ar}
         </a>
+
+        <a
+          href="roaa.pdf"
+          download
+          className="btn btn-outline-light mt-3 px-4 py-2 fw-bold shadow-lg d-block mx-auto"
+          data-aos="zoom-in"
+          data-aos-delay="800"
+        >
+          {isEnglish ? translations.home.cv_en : translations.home.cv_ar}
+        </a>
+
+        <button
+          onClick={toggleLanguage}
+          className="btn btn-warning mt-3 px-4 py-2 fw-bold shadow-lg d-block mx-auto"
+          data-aos="zoom-in"
+          data-aos-delay="1000"
+        >
+          {isEnglish ? "العربية" : "English"}
+        </button>
       </div>
 
-      {/* CSS النجوم */}
       <style jsx>{`
         .stars {
           position: absolute;

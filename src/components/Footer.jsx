@@ -1,4 +1,8 @@
+import { useLanguage } from "../LanguageContext";
+
 function Footer() {
+  const { isEnglish } = useLanguage();
+
   return (
     <footer
       className="text-center py-4 text-white"
@@ -76,7 +80,10 @@ function Footer() {
 
       {/* حقوق النشر */}
       <p className="mb-0 small">
-        © 2025 جميع الحقوق محفوظة - <strong>رؤى الخبتي</strong>
+        {isEnglish
+          ? "© 2025 All Rights Reserved - "
+          : "© 2025 جميع الحقوق محفوظة - "}
+        <strong>{isEnglish ? "Roaa Alkhapty" : "رؤى الخبتي"}</strong>
       </p>
     </footer>
   );

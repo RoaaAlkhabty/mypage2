@@ -1,17 +1,38 @@
 import React, { useEffect, useState } from "react";
+import { useLanguage } from "../LanguageContext";
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("#home");
   const [time, setTime] = useState(new Date().toLocaleTimeString());
-  const [showSearch, setShowSearch] = useState(false);
+  const { isEnglish, toggleLanguage } = useLanguage();
 
-  const sections = [
-    { name: "الرئيسية", href: "#home" },
-    { name: "من أنا", href: "#about" },
-    { name: "الأعمال", href: "#portfolio" },
-    { name: "تواصل", href: "#contact" },
-  ];
+  const translations = {
+    ar: {
+      brand: "موقعي الشخصي",
+      sections: [
+        { name: "الرئيسية", href: "#home" },
+        { name: "من أنا", href: "#about" },
+        { name: "الأعمال", href: "#portfolio" },
+        { name: "تواصل", href: "#contact" },
+      ],
+      langButton: "English",
+    },
+    en: {
+      brand: "My Portfolio",
+      sections: [
+        { name: "Home", href: "#home" },
+        { name: "About", href: "#about" },
+        { name: "Portfolio", href: "#portfolio" },
+        { name: "Contact", href: "#contact" },
+      ],
+      langButton: "العربية",
+    },
+  };
+
+  const { brand, sections, langButton } = isEnglish
+    ? translations.en
+    : translations.ar;
 
   // تحديث الوقت كل ثانية
   useEffect(() => {
@@ -41,7 +62,7 @@ function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [sections]);
 
   return (
     <nav
@@ -58,7 +79,7 @@ function Navbar() {
       <div className="container">
         {/* شعار الموقع */}
         <a className="navbar-brand fw-bold" href="#home">
-          موقعي الشخصي
+          {brand}
         </a>
 
         {/* زر التبديل للهواتف */}
@@ -93,10 +114,16 @@ function Navbar() {
             ))}
           </ul>
 
-          
-            {/* عرض الوقت */}
-          <div className="d-flex align-items-center ms-3">
-            <span className="ms-9 small fw-bold">{time}</span>
+          {/* عرض الوقت + زر اللغة */}
+          <div className="d-flex align-items-center ms-3 gap-2">
+            <span className="small fw-bold">{time}</span>
+            <button
+              onClick={toggleLanguage}
+              className="btn btn-sm btn-outline-light ms-2"
+              style={{ whiteSpace: "nowrap" }}
+            >
+              {langButton}
+            </button>
           </div>
         </div>
       </div>
