@@ -115,11 +115,13 @@ function Navbar() {
           </ul>
 
           {/* عرض الوقت + زر اللغة */}
-          <div className="d-flex align-items-center ms-3 gap-2">
-            <span className="small fw-bold">{time}</span>
+          <div className="d-flex align-items-center ms-lg-3 mt-3 mt-lg-0 gap-2">
+            {/* الوقت يختفي في الشاشات الصغيرة */}
+            <span className="small fw-bold d-none d-lg-inline">{time}</span>
+
             <button
               onClick={toggleLanguage}
-              className="btn btn-sm btn-outline-light ms-2"
+              className="btn btn-sm btn-warning fw-bold"
               style={{ whiteSpace: "nowrap" }}
             >
               {langButton}

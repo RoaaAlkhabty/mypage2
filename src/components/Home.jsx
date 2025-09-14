@@ -33,10 +33,12 @@ function Home() {
       className="hero-section d-flex align-items-center text-center text-white position-relative overflow-hidden"
       style={{
         background: `linear-gradient(${gradient}deg, #0d1b2a, #1b263b)`,
-        height: "100vh",
+        minHeight: "100vh",
         transition: "background 0.5s linear",
+        padding: "2rem 1rem",
       }}
     >
+      {/* النجوم */}
       <div className="stars">
         {stars.map((star, index) => (
           <span
@@ -54,33 +56,48 @@ function Home() {
       </div>
 
       <div className="container position-relative" style={{ zIndex: 2 }}>
+        {/* صورة شخصية */}
         <img
-          src="/images/اسمي.jpg"
+          src={`${import.meta.env.BASE_URL}images/اسمي.jpg`}
           alt="Roa Ahmed"
-          className="rounded-circle shadow-lg mb-4"
-          width="150"
-          height="150"
+          className="rounded-circle shadow-lg mb-4 img-fluid"
+          style={{
+            border: "4px solid white",
+            objectFit: "cover",
+            width: "150px",
+            height: "150px",
+            maxWidth: "100%",
+          }}
           data-aos="fade-down"
-          style={{ border: "4px solid white", objectFit: "cover" }}
         />
 
+        {/* الاسم */}
         <h1
           className="fw-bold"
           data-aos="fade-down"
           data-aos-duration="1000"
-          style={{ textShadow: "2px 2px 8px rgba(0,0,0,0.5)" }}
+          style={{
+            textShadow: "2px 2px 8px rgba(0,0,0,0.5)",
+            fontSize: "clamp(1.5rem, 5vw, 2.5rem)",
+          }}
         >
           {isEnglish ? translations.home.title_en : translations.home.title_ar}
         </h1>
+
+        {/* الوصف */}
         <p
-          className="lead"
+          className="lead px-2"
           data-aos="fade-up"
           data-aos-delay="300"
-          style={{ textShadow: "1px 1px 6px rgba(0,0,0,0.5)" }}
+          style={{
+            textShadow: "1px 1px 6px rgba(0,0,0,0.5)",
+            fontSize: "clamp(1rem, 3vw, 1.25rem)",
+          }}
         >
           {isEnglish ? translations.home.desc_en : translations.home.desc_ar}
         </p>
 
+        {/* زر البورتفوليو */}
         <a
           href="#portfolio"
           className="btn btn-light mt-4 px-4 py-2 fw-bold shadow-lg d-block mx-auto"
@@ -90,8 +107,9 @@ function Home() {
           {isEnglish ? translations.home.works_en : translations.home.works_ar}
         </a>
 
+        {/* رابط السيرة الذاتية */}
         <a
-          href="roaa.pdf"
+          href={`${import.meta.env.BASE_URL}roaa.pdf`}
           download
           className="btn btn-outline-light mt-3 px-4 py-2 fw-bold shadow-lg d-block mx-auto"
           data-aos="zoom-in"
@@ -100,6 +118,7 @@ function Home() {
           {isEnglish ? translations.home.cv_en : translations.home.cv_ar}
         </a>
 
+        {/* زر تغيير اللغة */}
         <button
           onClick={toggleLanguage}
           className="btn btn-warning mt-3 px-4 py-2 fw-bold shadow-lg d-block mx-auto"
@@ -110,6 +129,7 @@ function Home() {
         </button>
       </div>
 
+      {/* CSS للنجوم */}
       <style jsx>{`
         .stars {
           position: absolute;

@@ -17,11 +17,19 @@ function Contact() {
         "IT9PG_3_Xkyp1O-pf" // Public Key
       )
       .then(
-        (result) => {
-          alert(isEnglish ? "✅ Message sent successfully!" : "✅ تم إرسال الرسالة بنجاح!");
+        () => {
+          alert(
+            isEnglish
+              ? "✅ Message sent successfully!"
+              : "✅ تم إرسال الرسالة بنجاح!"
+          );
         },
-        (error) => {
-          alert(isEnglish ? "❌ Error occurred, please try again." : "❌ حدث خطأ، حاول مرة أخرى.");
+        () => {
+          alert(
+            isEnglish
+              ? "❌ Error occurred, please try again."
+              : "❌ حدث خطأ، حاول مرة أخرى."
+          );
         }
       );
   };
@@ -37,13 +45,15 @@ function Contact() {
             color: "transparent",
           }}
         >
-          {isEnglish ? translations.contact.title_en : translations.contact.title_ar}
+          {isEnglish
+            ? translations.contact.title_en
+            : translations.contact.title_ar}
         </h2>
 
         <form
           ref={form}
           onSubmit={sendEmail}
-          className="w-75 mx-auto shadow p-4 rounded bg-white"
+          className="mx-auto shadow p-4 rounded bg-white w-100"
           style={{ maxWidth: "600px" }}
         >
           <div className="mb-3">
@@ -77,7 +87,7 @@ function Contact() {
 
           <button
             type="submit"
-            className="btn px-5 py-2 fw-bold shadow-sm"
+            className="btn w-100 px-3 py-2 fw-bold shadow-sm"
             style={{
               background: "linear-gradient(to right, #007bff, #6610f2)",
               border: "none",
